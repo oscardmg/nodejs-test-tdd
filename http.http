@@ -1,0 +1,24 @@
+GET http://localhost:3000
+
+###
+POST http://localhost:3000
+
+{
+    "nombre": "nueva mascota",
+    "tipo": "mascota extraña",
+    "descripcion": "no saabemos que es"
+}
+
+
+###
+PUT http://localhost:3000/11
+
+{
+    "nombre": "nueva mascota",
+    "tipo": "mascota extraña",
+    "descripcion": "no saabemos que es"
+}
+
+###
+DELETE http://localhost:3000/11
+
