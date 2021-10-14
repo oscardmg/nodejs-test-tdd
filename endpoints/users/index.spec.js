@@ -96,5 +96,36 @@ describe('#Endpoints', () => {
       })
 
     });
+    describe('post', () => {
+      it('insert user json', async () => {
+        const axios = {
+          post: jest.fn().mockResolvedValue({ data: 1 })
+        }
+
+        const res = {
+          status: jest.fn().mockReturnThis(),
+          send: jest.fn()
+        }
+
+        const req = {
+          body: 'request body'
+        }
+
+        await handlers({ axios }).post(req, res);
+
+        expect(res.status.mock.calls).toEqual([[201]]);
+        expect(res.send.mock.calls).toEqual([[1]]);
+
+        /** 
+         * en la funcion post, se tiene const:
+         *   { data } = await axios.post('https://jsonplaceholder.typicode.com/users', body);
+         * a post se le estan enviando dos parametros, estos quedan almacenados en mock.calls en un array en el orden que se envian
+         */
+        expect(axios.post.mock.calls).toEqual([[
+          'https://jsonplaceholder.typicode.com/users',
+          'request body'
+        ]]);
+      })
+    });
   });
 });
